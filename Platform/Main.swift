@@ -18,6 +18,8 @@ import Logging
 import TipKit
 #if os(macOS)
 import AppKit
+#else
+import UIKit
 #endif
 
 let logger = Logger(label: "com.utmapp.UTM") { label in
@@ -38,13 +40,17 @@ class Main {
     static var jitAvailable = true
     
     static func main() {
-        #if os(macOS)
+        #if DEBUG
+        UTMTestSupport.applyLaunchArguments()
+        #endif
         if isTestHost {
             UTMPatches.patchAll()
+            #if os(iOS) || os(visionOS)
+            registerDefaultsFromSettingsBundle()
+            #endif
             runAsTestHost()
             return
         }
-        #endif
         #if (os(iOS) || os(visionOS)) && WITH_JIT
         // check if we have jailbreak
         if jb_spawn_ptrace_child(CommandLine.argc, CommandLine.unsafeArgv) {
@@ -71,15 +77,27 @@ class Main {
         registerDefaultsFromSettingsBundle()
         // register tips
         if #available(iOS 17, macOS 14, *) {
+            #if DEBUG
+            // a tip's popover would cover the toolbar the UI tests drive
+            if UTMTestSupport.isTestMode {
+                Tips.hideAllTipsForTesting()
+            }
+            #endif
             try? Tips.configure()
         }
         #endif
         UTMApp.main()
     }
     
-    #if os(macOS)
     /// True when XCTest loaded this app as the host for a unit test bundle.
+    ///
+    /// An app launched by a UI test runs normally even if the runner's environment reaches it.
     static private var isTestHost: Bool {
+        #if DEBUG
+        if CommandLine.arguments.contains(UTMTestSupport.testModeArgument) {
+            return false
+        }
+        #endif
         let environment = ProcessInfo.processInfo.environment
         return environment["XCTestConfigurationFilePath"] != nil || environment["XCTestBundlePath"] != nil || environment["XCTestSessionIdentifier"] != nil
     }
@@ -88,10 +106,13 @@ class Main {
     /// without the home window opening, the VM list being scanned, or release
     /// notes being fetched.
     static private func runAsTestHost() {
+        #if os(macOS)
         NSApplication.shared.setActivationPolicy(.prohibited)
         NSApplication.shared.run()
+        #else
+        _ = UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, nil)
+        #endif
     }
-    #endif
 
     // https://stackoverflow.com/a/44675628
     static private func registerDefaultsFromSettingsBundle() {
