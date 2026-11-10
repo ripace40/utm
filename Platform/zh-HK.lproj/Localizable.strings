@@ -66,6 +66,9 @@ VMDisplayQemuTerminalWindowController */
 /* No comment provided by engineer. */
 "• " = "• ";
 
+/* UTMScriptingConfigImpl */
+"A drive can only be made larger." = "磁碟只能擴大儲存空間。";
+
 /* UTMAppleDiskImage */
 "A drive cannot be read only once a snapshot has been taken of it." = "一旦製作磁碟快照，將無法將磁碟設為唯讀。";
 
@@ -1095,6 +1098,9 @@ UTMVirtualMachine */
 /* UTMScriptingVirtualMachineImpl */
 "One or more required parameters are missing or invalid." = "一個或多個所需的引數缺失或無效。";
 
+/* UTMScriptingConfigImpl */
+"Only a QCOW2 drive stored in the virtual machine can be resized." = "只可以調整儲存於虛擬機中的 QCOW2 磁碟大小。";
+
 /* Welcome view */
 "Open Existing Virtual Machine" = "開啟現有的虛擬機";
 
@@ -1422,9 +1428,6 @@ UTMQemuConstants */
 /* No comment provided by engineer. */
 "Show dock icon" = "顯示 Dock 圖示";
 
-/* VMTouchpadView */
-"Show Keyboard" = "顯示鍵盤";
-
 /* No comment provided by engineer. */
 "Show menu bar icon" = "顯示選單列圖示";
 
@@ -1573,6 +1576,9 @@ VMSnapshotsView */
 /* UTMAppleDiskImage */
 "The disk image is incomplete because some of its data could not be read." = "磁碟映像檔不完整，因為當中的一些資料無法讀取。";
 
+/* UTMDownloadSupportToolsTaskError */
+"The download of the guest support tools was cancelled." = "客户端支援工具的下載已取消。";
+
 /* Error shown when importing a ZIP file from web that contains an entry pointing outside of the virtual machine directory. */
 "The downloaded ZIP archive contains an invalid path." = "下載的 ZIP 封存檔中包含無效路徑。";
 
@@ -1611,6 +1617,9 @@ VMSnapshotsView */
 
 /* UTMAppleVirtualMachine */
 "The password for the guest account is not valid." = "客户端帳户的密碼無效。";
+
+/* UTMScriptingConfigImpl */
+"The protocol of a port forward must be TCP or UDP." = "連接埠轉發的通訊協定必須是 TCP 或 UDP。";
 
 /* UTMScriptingVirtualMachineImpl */
 "The QEMU guest agent is not running or not installed on the guest." = "QEMU 客户端代理程式未執行，或是未在客户端上安裝。";
@@ -1779,9 +1788,6 @@ VMSnapshotsView */
 
 /* VMDisplayQemuMetalWindowController */
 "To release the mouse cursor, press %@ at the same time." = "如要放開滑鼠指標，請同時按一下 %@。";
-
-/* VMTouchpadView */
-"Touchpad" = "觸碰板";
 
 /* No comment provided by engineer. */
 "Trust" = "信任";
@@ -2773,6 +2779,9 @@ VMWizardOSMacView */
 /* No comment provided by engineer. */
 "Show in Finder" = "在 Finder 中顯示";
 
+/* VMTouchpadView */
+"Show Keyboard" = "顯示鍵盤";
+
 /* No comment provided by engineer. */
 "Show the main window." = "顯示主視窗。";
 
@@ -2892,6 +2901,9 @@ VMWizardOSMacView */
 
 /* No comment provided by engineer. */
 "To change this, remove the shared directory and add it again." = "如要更改此選項，請移除分享的目錄並重新加回。";
+
+/* VMTouchpadView */
+"Touchpad" = "觸碰板";
 
 /* No comment provided by engineer. */
 "TPM 2.0 Device" = "TPM 2.0 裝置";
